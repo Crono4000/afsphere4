@@ -22,7 +22,7 @@
                 <tr>
                     <td>{{ info[0] }}</td>
                     <td>{{ info[1] }}</td>
-                    <td><button>page</button></td>
+                    <td><a href="/info/{{ info[0] }}">page</a></td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -33,7 +33,7 @@
         const bar = document.getElementById("search_bar");
 
         button.addEventListener("click", () => {
-            window.location.href = "/search_infos?page=0&search=" + bar.value;
+            window.location.href = "/search_infos/0?search=" + bar.value;
         });
     </script>
 

@@ -70,3 +70,29 @@ BEGIN
 	END IF;
 END;
 $$;
+
+CREATE OR REPLACE FUNCTION get_info(id INTEGER)
+RETURNS TABLE (titler TEXT, infor TEXT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	RETURN QUERY
+	SELECT i.title, i.info_content
+	FROM info AS i
+    WHERE info_id = id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION get_info_tags(id INTEGER)
+RETURNS TABLE (tag TEXT )
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	RETURN QUERY
+	SELECT t.tag_name
+	FROM tag AS t
+    JOIN info_tag AS it ON t.tag_name = it.tag_name
+	JOIN info AS i ON it.info_id = i.info_id
+    WHERE i.info_id = id;
+END;
+$$;
