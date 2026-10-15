@@ -1,0 +1,15 @@
+server {
+    listen 443 ssl;
+    server_name afsphere.chickenkiller.com www.afsphere.chickenkiller.com;
+
+    ssl_certificate /assl/server.crt;
+    ssl_certificate_key /assl/server.key;
+
+    location / {
+        client_max_body_size 0;
+        proxy_request_buffering off;
+
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_pass http://127.0.0.1:5000; 
+    }
+}

@@ -1,0 +1,7 @@
+
+server {
+    listen 80;
+    server_name afsphere.chickenkiller.com www.afsphere.chickenkiller.com;
+
+    return 301 https://afsphere.chickenkiller.com$request_uri;
+}

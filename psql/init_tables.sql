@@ -8,6 +8,15 @@ CREATE TABLE IF NOT EXISTS info (
     active BOOLEAN DEFAULT TRUE
 );
 
+CREATE TABLE IF NOT EXISTS file (
+    file_id SERIAL PRIMARY KEY,
+    file_score INT DEFAULT 0,
+	file_content TEXT DEFAULT NULL,
+    file_name TEXT,
+	insert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    active BOOLEAN DEFAULT TRUE
+);
+
 CREATE TABLE IF NOT EXISTS tag (
     tag_name TEXT PRIMARY KEY,
     UNIQUE (tag_name)
@@ -22,6 +31,22 @@ CREATE TABLE IF NOT EXISTS info_tag (
 
     FOREIGN KEY (info_id)
     REFERENCES info(info_id)
+    ON DELETE CASCADE,
+
+    FOREIGN KEY (tag_name)
+    REFERENCES tag(tag_name)
+    ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS file_tag (
+    tag_name TEXT,
+    file_id INTEGER,
+
+    PRIMARY KEY (tag_name, file_id),
+    UNIQUE (tag_name, file_id),
+
+    FOREIGN KEY (file_id)
+    REFERENCES file(file_id)
     ON DELETE CASCADE,
 
     FOREIGN KEY (tag_name)
@@ -49,7 +74,7 @@ CREATE TABLE IF NOT EXISTS permission_user (
 
 CREATE TABLE IF NOT EXISTS login_session (
     key_login SERIAL PRIMARY KEY,
-    session_token TEXT,
+    session_token VARCHAR(200),
     user_id INTEGER,
 	expire_date DATE DEFAULT (CURRENT_DATE + 7),
 

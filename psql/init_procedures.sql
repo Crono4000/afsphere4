@@ -1,4 +1,6 @@
 
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 CREATE OR REPLACE PROCEDURE insert_info(titlee TEXT, infoe TEXT, OUT iid INT)
 LANGUAGE plpgsql
 AS $$
@@ -31,5 +33,13 @@ BEGIN
     LOOP
         CALL insert_info_tag(tagg, info);
     END LOOP;
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE insert_new_user(userr VARCHAR(30), password TEXT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	INSERT INTO app_user(username, hash_password) VALUES (user, crypt(password, gen_salt('bf', 12)));
 END;
 $$;

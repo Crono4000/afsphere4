@@ -2,31 +2,34 @@
 <html>
 <head>
     <title>Create Info</title>
+    <link rel="stylesheet" href="/static/css/my.css">
 </head>
 <body>
 
+    <div class="h_center full_height">
     <h1>Create Info</h1>
 
-    <form method="POST" action="/post/add_info">
+    <form class="full_height" method="POST" action="/add_info">
 
-        <label>Title:</label>
+        <label>Title:</label><br>
         <input type="text" name="title">
 
         <br>
 
-        <label>Info:</label>
-        <textarea type="text" name="info"></textarea>
+        <label>Info:</label><br>
+        <textarea class="full_width gg_height my_text" type="text" name="info"></textarea>
 
         <br>
 
-        <label>Tags:</label>
-        <textarea type="text" name="tags"></textarea>
+        <label>Tags:</label><br>
+        <textarea class="full_width my_text" type="text" name="tags"></textarea>
 
         <br>
 
         <button type="submit">Create</button>
 
     </form>
+    </div>
 
 </body>
 </html>

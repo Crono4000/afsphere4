@@ -1,0 +1,31 @@
+
+.h_center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+.full_height {
+    height: 100vh;
+}
+
+.full_width {
+    width: 100%;
+}
+
+.my_text {
+    text-align: left;
+    vertical-align: top;
+}
+
+.gg_height {
+    height: 50%;
+    box-sizing: border-box;
+}
+
+.horizontal_div {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
