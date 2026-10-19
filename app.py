@@ -108,7 +108,7 @@ def post_edit_title_info():
     if title is None or info_id is None:
         return flask.redirect("/")
     db.Execute("UPDATE info SET title = %s WHERE info_id = %s", [title, info_id])
-    return flask.redirect(flask.url_for("info", id=info_id))
+    return flask.redirect(flask.url_for("edit_info", id=info_id))
 
 
 @app.route("/edit_content_info", methods=["POST"])
@@ -118,7 +118,27 @@ def post_edit_content_info():
     if content is None or info_id is None:
         return flask.redirect("/")
     db.Execute("UPDATE info SET info_content = %s WHERE info_id = %s", [content, info_id])
-    return flask.redirect(flask.url_for("info", id=info_id))
+    return flask.redirect(flask.url_for("edit_info", id=info_id))
+
+
+@app.route("/add_tag_info", methods=["POST"])
+def post_add_tag_info():
+    tag = flask.request.form.get("tag")
+    info_id = flask.request.form.get("info_id")
+    if tag is None or info_id is None:
+        return flask.redirect("/")
+    db.Execute("CALL insert_info_tag(%s, %s);", [tag, info_id])
+    return flask.redirect(flask.url_for("edit_info", id=info_id))
+
+
+@app.route("/delete_tag_info", methods=["POST"])
+def post_delete_tag_info():
+    tag = flask.request.form.get("tag")
+    info_id = flask.request.form.get("info_id")
+    if tag is None or info_id is None:
+        return flask.redirect("/")
+    db.Execute("CALL delete_info_tag(%s, %s);", [tag, info_id])
+    return flask.redirect(flask.url_for("edit_info", id=info_id))
                           
 
 @app.route("/login", methods=["POST"])

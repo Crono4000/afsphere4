@@ -23,6 +23,16 @@ BEGIN
 END;
 $$;
 
+CREATE OR REPLACE PROCEDURE delete_info_tag(tagg TEXT, infoo INT)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+	tag TEXT;
+BEGIN
+    DELETE FROM info_tag WHERE tag_name = tagg AND info_id = infoo;
+END;
+$$;
+
 CREATE OR REPLACE PROCEDURE insert_info_tags(tags TEXT[], info INT)
 LANGUAGE plpgsql
 AS $$

@@ -32,3 +32,6 @@ class AfsphereDB():
 
     def close(self):
         self.conn.close()
+
+    #def write_oid(self, oid: int) -> None:
+        
